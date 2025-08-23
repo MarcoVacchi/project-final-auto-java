@@ -1,16 +1,26 @@
 package org.lessons.java.project_final_auto_java.model;
 
+// import java.util.ArrayList;
+// import java.util.List;
+
 import io.micrometer.common.lang.NonNull;
+//import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+// import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.JoinTable;
+// import jakarta.persistence.ManyToMany;
+// import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "automobili")
 public class Automobile {
+
+    // VARIABILI D ISTANZA
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +44,21 @@ public class Automobile {
     @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
     private String trasmissione;
 
+    @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
     private String immagine_url;
+
+    // RELAZIONI
+
+    // @OneToMany(mappedBy = "automobile", cascade = CascadeType.ALL, orphanRemoval
+    // = true)
+    // private List<Recensione> recensioni = new ArrayList<>();
+
+    // @ManyToMany
+    // @JoinTable(name = "auto_optional", joinColumns = @JoinColumn(name =
+    // "auto_id"), inverseJoinColumns = @JoinColumn(name = "optional_id"))
+    // private List<OptionalAuto> optionalList = new ArrayList<>();
+
+    // GETTER E SETTER
 
     public Long getId() {
         return this.id;
@@ -98,6 +122,12 @@ public class Automobile {
 
     public void setImmagine_url(String immagine_url) {
         this.immagine_url = immagine_url;
+    }
+
+    @Override
+    public String toString() {
+        return this.modello + this.marca + this.prezzo + this.anno_produzione + this.carburante + this.trasmissione
+                + this.immagine_url;
     }
 
 }
