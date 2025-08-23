@@ -25,16 +25,16 @@
                         <strong>
                             <p class="mb-1">Prezzo: [[*{prezzo}]] $</p>
                         </strong>
-                        <p class="card-text text-muted">Anno: <strong>[[*{anno_produzione}]]</strong></p>
+                        <!-- <p class="card-text text-muted">Anno: <strong>[[*{anno_produzione}]]</strong></p>
                         <p class="card-text text-muted">carburante: <strong>[[*{carburante}]]</strong></p>
-                        <p class="card-text text-muted">Trasmissione: <strong>[[*{trasmissione}]]</strong></p>
-                        <a href="#" class="btn btn-outline-primary btn-sm">Dettagli</a>
+                        <p class="card-text text-muted">Trasmissione: <strong>[[*{trasmissione}]]</strong></p> -->
+                        <a th:href="@{/automobili/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm">Dettagli
+                            auto</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
 </body>
 

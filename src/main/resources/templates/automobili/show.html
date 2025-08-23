@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobili</title>
+</head>
+
+<body class="bg-secondary">
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+
+    <div class="container mx-auto" th:object="${automobile}">
+        <h1 class="text-center mt-5 text-light">[[*{marca}]]</h1>
+        <h5 class="text-center mb-5 text-light">[[*{modello}]]</h5>
+        <div class=" d-flex">
+            <img th:src="*{immagine_url}" class="card-img-top img-fluid rounded-4 mx-5" alt="auto-img"
+                style="height: 500px; width: 700px; object-fit: cover;">
+            <div class="text-light">
+                <h3 class="mb-1 fs-1"></h3>
+
+                <strong>
+                    <p class="fs-3">Prezzo: [[*{prezzo}]] $</p>
+                </strong>
+                <p class="fs-3">Anno: <strong>[[*{anno_produzione}]]</strong></p>
+                <p class="fs-3">Carburante: <strong>[[*{carburante}]]</strong></p>
+                <p class="fs-3">Trasmissione: <strong>[[*{trasmissione}]]</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
