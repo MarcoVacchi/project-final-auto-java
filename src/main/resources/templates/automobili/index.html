@@ -14,7 +14,7 @@
     <div class="container mx-auto">
         <h1 class="text-center mt-5 mb-5 p-5 text-light">Le nostre automobili!</h1>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-5">
             <div class="col" th:each="automobile : ${automobili}" th:object="${automobile}">
                 <div class="card h-100 shadow-sm border-0">
                     <img th:src="*{immagine_url}" class="card-img-top img-fluid" alt="auto-img"

@@ -47,6 +47,9 @@ public class Automobile {
     @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
     private String immagine_url;
 
+    @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
+    private String descrizione;
+
     // RELAZIONI
 
     // @OneToMany(mappedBy = "automobile", cascade = CascadeType.ALL, orphanRemoval
@@ -124,10 +127,18 @@ public class Automobile {
         this.immagine_url = immagine_url;
     }
 
+    public String getDescrizione() {
+        return this.descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     @Override
     public String toString() {
         return this.modello + this.marca + this.prezzo + this.anno_produzione + this.carburante + this.trasmissione
-                + this.immagine_url;
+                + this.immagine_url + this.descrizione;
     }
 
 }
