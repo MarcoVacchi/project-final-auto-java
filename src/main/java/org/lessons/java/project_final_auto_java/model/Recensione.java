@@ -1,53 +1,58 @@
-// package org.lessons.java.project_final_auto_java.model;
+package org.lessons.java.project_final_auto_java.model;
 
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
-// import jakarta.persistence.ManyToOne;
+import java.util.Optional;
 
-// @Entity
-// public class Recensione {
-// @Id
-// @GeneratedValue(strategy = GenerationType.IDENTITY)
-// private Long id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-// private String contenuto;
+@Entity
+public class Recensione {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-// private int valutazione;
+    private String descrizione;
 
-// @ManyToOne
-// private Automobile automobile;
+    private int valutazione;
 
-// public Long getId() {
-// return this.id;
-// }
+    @ManyToOne
+    @JoinColumn(name = "automobile_id", nullable = false)
+    private Automobile automobile;
 
-// public void setId(Long id) {
-// this.id = id;
-// }
+    public Long getId() {
+        return this.id;
+    }
 
-// public String getContenuto() {
-// return this.contenuto;
-// }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-// public void setContenuto(String contenuto) {
-// this.contenuto = contenuto;
-// }
+    public String getDescrizione() {
+        return this.descrizione;
+    }
 
-// public int getValutazione() {
-// return this.valutazione;
-// }
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 
-// public void setValutazione(int valutazione) {
-// this.valutazione = valutazione;
-// }
+    public int getValutazione() {
+        return this.valutazione;
+    }
 
-// public Automobile getAutomobile() {
-// return this.automobile;
-// }
+    public void setValutazione(int valutazione) {
+        this.valutazione = valutazione;
+    }
 
-// public void setAutomobile(Automobile automobile) {
-// this.automobile = automobile;
-// }
-// }
+    public Automobile getAutomobile() {
+        return this.automobile;
+    }
+
+    public void setAutomobile(Automobile automobile) {
+        this.automobile = automobile;
+    }
+
+}

@@ -1,20 +1,20 @@
 package org.lessons.java.project_final_auto_java.model;
 
-// import java.util.ArrayList;
-// import java.util.List;
-
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micrometer.common.lang.NonNull;
-//import jakarta.persistence.CascadeType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.JoinTable;
-// import jakarta.persistence.ManyToMany;
-// import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "automobili")
@@ -35,7 +35,7 @@ public class Automobile {
     @NonNull
     private Double prezzo;
 
-    @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
+    @NotNull
     private Integer anno_produzione;
 
     @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
@@ -52,16 +52,35 @@ public class Automobile {
 
     // RELAZIONI
 
-    // @OneToMany(mappedBy = "automobile", cascade = CascadeType.ALL, orphanRemoval
-    // = true)
-    // private List<Recensione> recensioni = new ArrayList<>();
+    // uno a piu
 
-    // @ManyToMany
-    // @JoinTable(name = "auto_optional", joinColumns = @JoinColumn(name =
-    // "auto_id"), inverseJoinColumns = @JoinColumn(name = "optional_id"))
-    // private List<OptionalAuto> optionalList = new ArrayList<>();
+    @OneToMany(mappedBy = "automobile", cascade = { CascadeType.REMOVE })
+    private List<Recensione> recensioni;
+
+    // piu a piu
+
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(name = "automobile_optional", joinColumns = @JoinColumn(name = "automobile_id"), inverseJoinColumns = @JoinColumn(name = "optionalAuto_id"))
+    private List<OptionalAuto> optionalList;
 
     // GETTER E SETTER
+
+    public List<Recensione> getRecensioni() {
+        return this.recensioni;
+    }
+
+    public void setRecensioni(List<Recensione> recensioni) {
+        this.recensioni = recensioni;
+    }
+
+    public List<OptionalAuto> getOptionalList() {
+        return this.optionalList;
+    }
+
+    public void setOptionalList(List<OptionalAuto> optionalList) {
+        this.optionalList = optionalList;
+    }
 
     public Long getId() {
         return this.id;

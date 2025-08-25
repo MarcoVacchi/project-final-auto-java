@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recensioni Auto</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+
+    <div class="col-8 container mx-auto">
+        <div class="card mb-5" style="max-width: 500px">
+
+            <!-- Messaggi di controllo -->
+            <div th:if="${recensione == null}">
+                <h1>Nessuna recensione trovata</h1>
+            </div>
+
+            <div th:if="${recensione != null and recensione.automobile == null}">
+                <h1>Nessuna automobile associata alla recensione</h1>
+            </div>
+
+            <div th:if="${recensione != null and recensione.automobile != null}">
+                <h1
+                    th:text="'Recensione per: ' + ${recensione.automobile.marca} + ' ' + ${recensione.automobile.modello}">
+                    Nome auto</h1>
+                <img th:src="${recensione.automobile.immagine_url}" alt="Immagine auto" style="width: 100%;">
+                <div class="card-body">
+                    <h3>Dettagli Auto:</h3>
+                    <h4 class="card-text" th:text="'Anno: ' + ${recensione.automobile.anno_produzione}">Anno produzione
+                    </h4>
+                    <h4 class="card-text" th:text="'Carburante: ' + ${recensione.automobile.carburante}">Carburante</h4>
+                    <h4 class="card-text" th:text="'Trasmissione: ' + ${recensione.automobile.trasmissione}">
+                        Trasmissione</h4>
+                </div>
+            </div>
+
+            <!-- Form recensione -->
+            <form th:action="${edit} ? @{/recensioni/edit/{id}(id=${recensione.id})} : @{/recensioni/create}"
+                th:object="${recensione}" method="post" class="mb-5">
+
+                <input type="hidden" th:field="*{automobile.id}" />
+
+                <div class="mb-3">
+                    <label class="form-label" for="descrizione">Descrizione:</label>
+                    <textarea class="form-control" id="descrizione" th:field="*{descrizione}" rows="4"
+                        th:errorClass="is-invalid"></textarea>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('descrizione')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="valutazione">Valutazione (1-5):</label>
+                    <input class="form-control" type="number" id="valutazione" min="1" max="5" th:field="*{valutazione}"
+                        th:errorClass="is-invalid" />
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('valutazione')}">
+                        <ul>
+                            <li th:each="error : ${#fields.errors('valutazione')}" th:text="${error}"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pulsante di invio -->
+                <button type="submit" class="btn btn-primary">Salva Recensione</button>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

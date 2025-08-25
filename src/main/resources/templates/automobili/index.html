@@ -14,6 +14,14 @@
     <div class="container mx-auto">
         <h1 class="text-center mt-5 mb-5 p-5 text-light">Le nostre automobili!</h1>
 
+        <!-- <form method="get" th:action="@{/automobili/searchByModel}" class="text-center m-5 mb-5">
+            <input type="text" name="modello" placeholder="Cerca per titolo..." th:value="${modello}" />
+            <button type="submit">Cerca</button>
+        </form> -->
+        <div>
+            <a class="me-auto btn btn-primary btn-sm" th:href="@{automobili/create}">Crea nuova auto</a>
+        </div>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-5">
             <div class="col" th:each="automobile : ${automobili}" th:object="${automobile}">
                 <div class="card h-100 shadow-sm border-0">
@@ -28,13 +36,44 @@
                         <!-- <p class="card-text text-muted">Anno: <strong>[[*{anno_produzione}]]</strong></p>
                         <p class="card-text text-muted">carburante: <strong>[[*{carburante}]]</strong></p>
                         <p class="card-text text-muted">Trasmissione: <strong>[[*{trasmissione}]]</strong></p> -->
+
                         <a th:href="@{/automobili/{id}(id=*{id})}" class="btn btn-outline-primary btn-sm">Dettagli
                             auto</a>
+                        <a class="btn btn-success btn-sm" th:href="@{/automobili/edit/{id}(id=*{id})}">Edit</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            th:data-bs-target="'#delete-modal-' + *{id}">
+                            Delete
+                        </button>
+                        <div class="modal fade" tabindex="-1" th:id="'delete-modal-' + *{id}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete [[*{modello}]]</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Sei sicuro di voler eliminare la auto?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Chiudi</button>
+                                        <form method="post" th:action="@{/automobili/delete/{id}(id=*{id})}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Conferma
+                                                elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <th:block th:replace="~{fragment :: script-bootstrap}"></th:block>
 
 </body>
 

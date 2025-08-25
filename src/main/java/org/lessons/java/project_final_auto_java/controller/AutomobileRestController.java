@@ -27,7 +27,7 @@ public class AutomobileRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Automobile> show(@PathVariable Integer id) {
-        Optional<Automobile> automobileAttempt = automobileService.findById(id);
+        Optional<Automobile> automobileAttempt = automobileService.getById(id);
         if (automobileAttempt.isEmpty()) {
             return new ResponseEntity<Automobile>(HttpStatus.NOT_FOUND);
         }

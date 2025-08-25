@@ -17,7 +17,28 @@ public class AutomobileService {
         return automobileRepository.findAll();
     }
 
-    public Optional<Automobile> findById(Integer id) {
+    // public List<Automobile> findByModelloContaining(String modello) {
+    // return automobileRepository.findByModelloContainingIgnoreCase(modello);
+    // };
+
+    public Automobile findById(Integer id) {
+
+        return automobileRepository.findById(id).get();
+    }
+
+    public Optional<Automobile> getById(Integer id) {
         return automobileRepository.findById(id);
+    }
+
+    public Automobile create(Automobile auto) {
+        return automobileRepository.save(auto);
+    }
+
+    public Automobile update(Automobile auto) {
+        return automobileRepository.save(auto);
+    }
+
+    public void deleteById(Integer id) {
+        automobileRepository.deleteById(id);
     }
 }

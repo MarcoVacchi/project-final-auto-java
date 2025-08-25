@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modifica Recensione</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+
+    <div class="container col-8 mx-auto my-5">
+        <div class="card p-4">
+
+            <h2 class="mb-4"
+                th:text="'Modifica recensione per: ' + ${recensione.automobile.marca} + ' ' + ${recensione.automobile.modello}">
+                Modifica recensione</h2>
+
+            <div th:if="${recensione == null}">
+                <p class="text-danger">Nessuna recensione trovata.</p>
+            </div>
+
+            <div th:if="${recensione != null and recensione.automobile == null}">
+                <p class="text-danger">Nessuna automobile associata alla recensione.</p>
+            </div>
+
+            <div th:if="${recensione != null}">
+                <form th:action="@{/recensioni/edit/{id}(id=${recensione.id})}" th:object="${recensione}" method="post">
+
+                    <input type="hidden" th:field="*{automobile.id}" />
+
+                    <div class="mb-3">
+                        <label for="descrizione" class="form-label">Descrizione</label>
+                        <textarea id="descrizione" class="form-control" th:field="*{descrizione}" rows="5"
+                            th:errorclass="is-invalid"></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descrizione')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('descrizione')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="valutazione" class="form-label">Valutazione (1-5)</label>
+                        <input type="number" id="valutazione" min="1" max="5" class="form-control"
+                            th:field="*{valutazione}" th:errorclass="is-invalid" />
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('valutazione')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('valutazione')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                    <a th:href="@{/automobili/{id}/recensioni(id=${recensione.automobile.id})}"
+                        class="btn btn-secondary ms-2">Annulla</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

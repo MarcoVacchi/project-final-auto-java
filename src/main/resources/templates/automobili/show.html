@@ -12,7 +12,7 @@
     <th:block th:replace="~{fragment :: bootstrap}"></th:block>
     <th:block th:replace="~{fragment :: navBar}"></th:block>
 
-    <div class="container mx-auto" th:object="${automobile}">
+    <div class="container mx-auto mb-5" th:object="${automobile}">
         <h1 class="text-center mt-5 text-light">[[*{marca}]]</h1>
         <h5 class="text-center mb-5 text-light">[[*{modello}]]</h5>
         <div class=" d-flex">
@@ -31,6 +31,54 @@
             </div>
         </div>
     </div>
+    <div class="container bg-light mt-5 mb-5">
+        <a class="btn btn-outline-primary btn-sm mt-5 mb-5" th:href="@{/automobili/{id}/recensioni(id=*{id})}">Aggiungi
+            recensione</a>
+        <table>
+            <tbody>
+                <tr th:each="recensione : ${recensioni}" th:object="${recensione}">
+                    <td>[[*{id}]]</td>
+                    <td>[[*{descrizione}]]</td>
+                    <td>[[*{valutazione}]]</td>
+                    <td><a class="btn btn-success btn-sm" th:href="@{/recensioni/edit/{id}(id=${recensione.id})}">Edit
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            th:data-bs-target="'#delete-modal-' + ${recensione.id}">
+                            Delete
+                        </button>
+                        <div class="modal fade" tabindex="-1" th:id="'delete-modal-' + ${recensione.id}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete [[*{descrizione}]]</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Sei sicuro di voler eliminare la recensione?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Chiudi</button>
+                                        <form method="post" th:action="@{/recensioni/delete/{id}(id=${recensione.id})}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Conferma
+                                                elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <th:block th:replace="~{fragment :: script-bootstrap}"></th:block>
+
 </body>
+
 
 </html>
