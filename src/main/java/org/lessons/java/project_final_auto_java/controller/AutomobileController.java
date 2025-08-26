@@ -58,6 +58,7 @@ public class AutomobileController {
         return "automobili/index";
     }
 
+    // creazione nuova auto + optional
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("automobile", new Automobile());
@@ -65,6 +66,7 @@ public class AutomobileController {
         return "automobili/create";
     }
 
+    // creazione nuova auto + optional
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("automobile") Automobile formAutomobile, BindingResult bindingResult,
             Model model) {
@@ -75,6 +77,7 @@ public class AutomobileController {
         return "redirect:/automobili";
     }
 
+    // modifica
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("automobile", automobileService.getById(id).get());
@@ -82,6 +85,7 @@ public class AutomobileController {
         return "automobili/edit";
     }
 
+    // modifica
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("automobile") Automobile formAutomobile, BindingResult bindingResult,
             Model model) {
@@ -94,12 +98,14 @@ public class AutomobileController {
         return "redirect:/automobili";
     }
 
+    // eliminazione
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         automobileService.deleteById(id);
         return "redirect:/automobili";
     }
 
+    // recensioni oneToMany
     @GetMapping("/{id}/recensioni")
     public String recensione(@PathVariable("id") Integer id, Model model) {
         Recensione recensione = new Recensione();

@@ -24,7 +24,7 @@ public class Automobile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank(message = "Questo campo non può essere NULL, BLANK o EMPTY")
     private String modello;
@@ -82,11 +82,11 @@ public class Automobile {
         this.optionalList = optionalList;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

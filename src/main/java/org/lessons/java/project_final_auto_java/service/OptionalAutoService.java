@@ -3,7 +3,6 @@ package org.lessons.java.project_final_auto_java.service;
 import java.util.List;
 
 import org.lessons.java.project_final_auto_java.model.OptionalAuto;
-import org.lessons.java.project_final_auto_java.model.Recensione;
 import org.lessons.java.project_final_auto_java.repository.OptionalAutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
