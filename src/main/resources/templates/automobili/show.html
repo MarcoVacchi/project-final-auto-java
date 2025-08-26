@@ -28,10 +28,14 @@
                 <p class="fs-3">Carburante: <strong>[[*{carburante}]]</strong></p>
                 <p class="fs-3">Trasmissione: <strong>[[*{trasmissione}]]</strong></p>
                 <p class="fs-4">Descrizione: <strong>[[*{descrizione}]]</strong></p>
+                <p class="fs-4">Optionals: </p>
+                <ul>
+                    <li th:each="optional : *{optionalList}" th:text="${optional.nome}"></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="container bg-light mt-5 mb-5">
+    <div class="container mt-5 mb-5 bg-dark">
         <a class="btn btn-outline-primary btn-sm mt-5 mb-5" th:href="@{/automobili/{id}/recensioni(id=*{id})}">Aggiungi
             recensione</a>
         <table>

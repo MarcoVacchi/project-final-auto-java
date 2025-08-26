@@ -51,6 +51,7 @@ public class OptionalAutoController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("optional", optionalAutoService.findById(id));
+        model.addAttribute("optional", optionalAutoService.findAll());
         return "optionals/edit";
     }
 
@@ -58,6 +59,7 @@ public class OptionalAutoController {
     public String update(@Valid @ModelAttribute("optional") OptionalAuto formOptionalAuto, BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
+
             return "optionals/edit";
         }
         optionalAutoService.update(formOptionalAuto);

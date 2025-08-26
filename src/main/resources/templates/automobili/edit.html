@@ -11,7 +11,7 @@
 <body class="bg-secondary">
     <th:block th:replace="~{fragment :: bootstrap}"></th:block>
     <th:block th:replace="~{fragment :: navBar}"></th:block>
-    <div class="col-8 container mx-auto">
+    <div class="col-8 container mx-auto mb-5">
         <form th:action="@{/automobili/edit/{id}(id=${automobile.id})}" th:object="${automobile}" method="post">
             <input type="hidden" th:field="*{id}" />
             <div class="mb-3">

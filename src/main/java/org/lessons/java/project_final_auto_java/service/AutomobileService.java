@@ -17,9 +17,9 @@ public class AutomobileService {
         return automobileRepository.findAll();
     }
 
-    // public List<Automobile> findByModelloContaining(String modello) {
-    // return automobileRepository.findByModelloContainingIgnoreCase(modello);
-    // };
+    public List<Automobile> findByModelloContaining(String modello) {
+        return automobileRepository.findByModelloContainingIgnoreCase(modello);
+    };
 
     public Automobile findById(Integer id) {
 

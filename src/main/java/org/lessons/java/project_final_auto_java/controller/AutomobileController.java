@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -48,15 +49,14 @@ public class AutomobileController {
     }
 
     // ricerca
-    // @GetMapping("/searchByModel")
-    // public String searchByModel(@RequestParam(name = "modello") String modello,
-    // Model model) {
-    // List<Automobile> automobile =
-    // automobileService.findByModelloContaining(modello);
-    // model.addAttribute("automobili", automobile);
-    // model.addAttribute("name", modello);
-    // return "automobili/index";
-    // }
+    @GetMapping("/searchByModel")
+    public String searchByModel(@RequestParam(name = "modello") String modello,
+            Model model) {
+        List<Automobile> automobile = automobileService.findByModelloContaining(modello);
+        model.addAttribute("automobili", automobile);
+        model.addAttribute("name", modello);
+        return "automobili/index";
+    }
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -78,6 +78,7 @@ public class AutomobileController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("automobile", automobileService.getById(id).get());
+        model.addAttribute("optional", optionalAutoService.findAll());
         return "automobili/edit";
     }
 
@@ -85,7 +86,9 @@ public class AutomobileController {
     public String update(@Valid @ModelAttribute("automobile") Automobile formAutomobile, BindingResult bindingResult,
             Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("optionals", optionalAutoService.findAll());
             return "automobili/edit";
+
         }
         automobileService.update(formAutomobile);
         return "redirect:/automobili";
