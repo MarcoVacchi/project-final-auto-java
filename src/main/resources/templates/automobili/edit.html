@@ -23,15 +23,15 @@
                     </ul>
                 </div>
             </div>
-            <!-- <div class="mb-3">
-                <div class="single-ingredient form-check" th:each="ingredient : ${ingredients}">
-                    <input type="checkbox" th:id="|ingredient-${ingredient.id}|" th:field="${pizze.ingredients}"
-                        th:value="${ingredient.id}">
-                    <label th:for="|ingredient-${ingredient.id}|" class="form-check-label"
-                        th:text="${ingredient.name}" />
+
+            <div class="mb-3">
+                <div class="single-optional form-check" th:each="optional : ${optional}">
+                    <input type="checkbox" th:id="|optional-${optional.id}|" th:field="*{optionalList}"
+                        th:value="${optional.id}" />
+                    <label th:for="|optional-${optional.id}|" class="form-check-label" th:text="${optional.nome}" />
                 </div>
             </div>
-        -->
+
             <div class="mb-3">
                 <label class="form-label" for="marca">marca:</label>
                 <textarea class="form-control" id="marca" th:field="*{marca}" th:errorClass="is-invalid"></textarea>

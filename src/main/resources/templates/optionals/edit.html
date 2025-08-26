@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+
+    <div class="col-8 container mx-auto">
+        <div class="card mb-5" style="max-width: 500px">
+
+            <h1 th:if="${edit}">Optionals [[${optional.nome}]]</h1>
+            <h1 th:unless="${edit}">optionals</h1>
+        </div>
+
+        <form th:action="@{/optionals/edit/{id}(id=*{id})}" th:object="${optional}" method="post" class="mb-5">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label class="form-label" for="nome">Nome:</label>
+                <input class="form-control" type="text" id="text" th:field="*{nome}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Modifica optional</button>
+
+    </div>
+
+
+    </form>
+
+    </div>
+
+</body>
+
+</html>

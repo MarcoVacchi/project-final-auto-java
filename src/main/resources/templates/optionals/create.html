@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+
+    <div class="col-8 container mx-auto">
+
+        <form th:action="@{/optionals/create}" th:object="${optional}" method="post" class="mb-5">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label class="form-label" for="nome">Nome:</label>
+                <input class="form-control" type="text" id="text" th:field="*{nome}" th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+                    <ul>
+                        <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Crea Optional</button>
+    </div>
+
+
+    </form>
+
+    </div>
+
+</body>
+
+</html>

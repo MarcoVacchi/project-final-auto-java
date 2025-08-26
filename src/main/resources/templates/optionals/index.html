@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optionals</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragment :: bootstrap}"></th:block>
+    <th:block th:replace="~{fragment :: navBar}"></th:block>
+    <h1 class="text-center">Optionals</h1>
+    <div class="container mt-3 mb-3">
+        <a class="me-auto btn btn-primary btn-sm" th:href="@{/optionals/create}">Crea nuovi optional</a>
+    </div>
+
+    <table class="table container" th:if="${optionals.size() > 0}">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="optional: ${optionals}" th:object="${optional}">
+
+                <td scope="row">[[*{nome}]]</td>
+
+                <td><a class="btn btn-primary btn-sm" th:href="@{/optionals/{id}(id=*{id})}">Dettagli</a></td>
+                <td><a class="btn btn-success btn-sm" th:href="@{/optionals/edit/{id}(id=*{id})}">Modifica</td>
+
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        th:data-bs-target="'#delete-modal-' + *{id}">
+                        Elimina
+                    </button>
+
+                    <div class="modal fade" tabindex="-1" th:id="'delete-modal-' + *{id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete [[*{nome}]]</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Sei sicuro di voler eliminare l'optional?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Chiudi</button>
+                                    <form method="post" th:action="@{/optionals/delete/{id}(id=*{id})}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Conferma
+                                            elimina</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="text-center" th:if="${optionals.size() == 0}">Nessun optional presente al momento</p>
+    </div>
+
+    <th:block th:replace="~{fragment :: script-bootstrap}"></th:block>
+</body>
+
+</html>

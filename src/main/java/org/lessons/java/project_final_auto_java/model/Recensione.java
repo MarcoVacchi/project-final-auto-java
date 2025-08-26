@@ -1,7 +1,5 @@
 package org.lessons.java.project_final_auto_java.model;
 
-import java.util.Optional;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

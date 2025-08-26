@@ -5,6 +5,7 @@ import java.util.List;
 import org.lessons.java.project_final_auto_java.model.Automobile;
 import org.lessons.java.project_final_auto_java.model.Recensione;
 import org.lessons.java.project_final_auto_java.service.AutomobileService;
+import org.lessons.java.project_final_auto_java.service.OptionalAutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class AutomobileController {
     @Autowired
 
     private AutomobileService automobileService;
+
+    @Autowired
+    private OptionalAutoService optionalAutoService;
 
     // index
     @GetMapping
@@ -57,7 +61,7 @@ public class AutomobileController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("automobile", new Automobile());
-        // model.addAttribute("optional", new Optional())
+        model.addAttribute("optional", optionalAutoService.findAll());
         return "automobili/create";
     }
 
