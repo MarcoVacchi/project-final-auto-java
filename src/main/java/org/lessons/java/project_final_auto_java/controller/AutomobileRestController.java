@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("automobili/api")
 public class AutomobileRestController {
@@ -30,7 +32,7 @@ public class AutomobileRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Automobile> show(@PathVariable Integer id) {
+    public ResponseEntity<Automobile> show(@Valid @PathVariable Integer id) {
         Optional<Automobile> automobileAttempt = automobileService.getById(id);
         if (automobileAttempt.isEmpty()) {
             return new ResponseEntity<Automobile>(HttpStatus.NOT_FOUND);
@@ -39,12 +41,12 @@ public class AutomobileRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Automobile> store(@RequestBody Automobile automobile) {
+    public ResponseEntity<Automobile> store(@Valid @RequestBody Automobile automobile) {
         return new ResponseEntity<Automobile>(automobileService.create(automobile), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Automobile> update(@RequestBody Automobile automobile, @PathVariable Integer id) {
+    public ResponseEntity<Automobile> update(@Valid @RequestBody Automobile automobile, @PathVariable Integer id) {
         Optional<Automobile> automobileAttempt = automobileService.getById(id);
         if (automobileAttempt.isEmpty()) {
             return new ResponseEntity<Automobile>(HttpStatus.NOT_FOUND);

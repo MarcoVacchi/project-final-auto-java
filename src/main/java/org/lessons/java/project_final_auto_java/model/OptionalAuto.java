@@ -2,6 +2,8 @@ package org.lessons.java.project_final_auto_java.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class OptionalAuto {
     private String nome;
 
     @ManyToMany(mappedBy = "optionalList")
+    @JsonIgnore
     private List<Automobile> automobili;
 
     public Long getId() {

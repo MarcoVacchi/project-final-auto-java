@@ -60,7 +60,6 @@ public class Automobile {
     // piu a piu
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(name = "automobile_optional", joinColumns = @JoinColumn(name = "automobile_id"), inverseJoinColumns = @JoinColumn(name = "optionalAuto_id"))
     private List<OptionalAuto> optionalList;
 
