@@ -1,5 +1,6 @@
 package org.lessons.java.project_final_auto_java.controller;
 
+import org.lessons.java.project_final_auto_java.model.Automobile;
 import org.lessons.java.project_final_auto_java.model.OptionalAuto;
 import org.lessons.java.project_final_auto_java.service.OptionalAutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,16 @@ public class OptionalAutoController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
+
+        OptionalAuto optional = optionalAutoService.findById(id);
+
+        for (Automobile auto : optional.getAutomobili()) {
+            auto.getOptionalList().remove(optional);
+        }
+
         optionalAutoService.deleteById(id);
+
         return "redirect:/optionals";
     }
+
 }

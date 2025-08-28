@@ -39,11 +39,18 @@
         <a class="btn btn-outline-primary btn-sm mt-5 mb-5" th:href="@{/automobili/{id}/recensioni(id=*{id})}">Aggiungi
             recensione</a>
         <table>
+            <thead>
+                <tr>
+                    <th class="text-light mx-2" scope="col">Id</th>
+                    <th class="text-light" scope="col">Descrizione</th>
+                    <th class="text-light" scope="col">Valutazione</th>
+                </tr>
+            </thead>
             <tbody>
                 <tr th:each="recensione : ${recensioni}" th:object="${recensione}">
-                    <td>[[*{id}]]</td>
-                    <td>[[*{descrizione}]]</td>
-                    <td>[[*{valutazione}]]</td>
+                    <td class="text-light">[[*{id}]]</td>
+                    <td class="text-light">[[*{descrizione}]]</td>
+                    <td class="text-light">[[*{valutazione}]]</td>
                     <td><a class="btn btn-success btn-sm" th:href="@{/recensioni/edit/{id}(id=${recensione.id})}">Edit
                     </td>
                     <td>

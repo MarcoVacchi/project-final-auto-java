@@ -1,5 +1,7 @@
 package org.lessons.java.project_final_auto_java.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,7 @@ public class Recensione {
 
     @ManyToOne
     @JoinColumn(name = "automobile_id", nullable = false)
+    @JsonIgnore
     private Automobile automobile;
 
     public Long getId() {

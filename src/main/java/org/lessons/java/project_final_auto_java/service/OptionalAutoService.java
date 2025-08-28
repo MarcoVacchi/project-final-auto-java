@@ -31,4 +31,9 @@ public class OptionalAutoService {
     public void deleteById(Integer id) {
         optionalAutoRepository.deleteById(id);
     }
+
+    public void deleteOptionalSafe(Integer id) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'deleteOptionalSafe'");
+    }
 }
