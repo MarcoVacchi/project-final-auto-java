@@ -71,13 +71,10 @@ public class OptionalAutoController {
     public String delete(@PathVariable Integer id) {
 
         OptionalAuto optional = optionalAutoService.findById(id);
-
         for (Automobile auto : optional.getAutomobili()) {
             auto.getOptionalList().remove(optional);
         }
-
         optionalAutoService.deleteById(id);
-
         return "redirect:/optionals";
     }
 
