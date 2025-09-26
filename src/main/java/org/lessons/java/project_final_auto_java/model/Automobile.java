@@ -1,5 +1,6 @@
 package org.lessons.java.project_final_auto_java.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
@@ -32,7 +33,7 @@ public class Automobile {
     private String marca;
 
     @NonNull
-    private Double prezzo;
+    private BigDecimal prezzo;
 
     @NotNull
     private Integer anno_produzione;
@@ -104,11 +105,11 @@ public class Automobile {
         this.marca = marca;
     }
 
-    public Double getPrezzo() {
+    public BigDecimal getPrezzo() {
         return this.prezzo;
     }
 
-    public void setPrezzo(Double prezzo) {
+    public void setPrezzo(BigDecimal prezzo) {
         this.prezzo = prezzo;
     }
 
