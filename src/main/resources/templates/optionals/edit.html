@@ -25,7 +25,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="nome">Nome:</label>
-                <input class="form-control" type="text" id="text" th:field="*{nome}" th:errorclass="is-invalid">
+                <input class="form-control" type="text" id="nome" th:field="*{nome}" th:errorclass="is-invalid">
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
                     <ul>
                         <li th:each="error : ${#fields.errors('nome')}" th:text="${error}"></li>

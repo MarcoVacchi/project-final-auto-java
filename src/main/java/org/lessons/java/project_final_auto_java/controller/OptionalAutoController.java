@@ -52,7 +52,7 @@ public class OptionalAutoController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("optional", optionalAutoService.findById(id));
-        model.addAttribute("optional", optionalAutoService.findAll());
+        model.addAttribute("optionalList", optionalAutoService.findAll());
         return "optionals/edit";
     }
 
