@@ -19,7 +19,7 @@ public class AutomobileService {
 
     public List<Automobile> findByModelloContaining(String modello) {
         return automobileRepository.findByModelloContainingIgnoreCase(modello);
-    };
+    }
 
     public Automobile findById(Integer id) {
 
