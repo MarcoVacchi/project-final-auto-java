@@ -32,9 +32,16 @@ public class AutomobileController {
 
     // index
     @GetMapping
-    public String index(Model model) {
-        List<Automobile> automobile = automobileService.findAll();
-        model.addAttribute("automobili", automobile);
+    public String index(@RequestParam(name = "modello", required = false) String modello, Model model) {
+        List<Automobile> automobili;
+
+        if (modello != null && !modello.isEmpty()) {
+            automobili = automobileService.findByModelloContaining(modello);
+        } else {
+            automobili = automobileService.findAll();
+        }
+        model.addAttribute("automobili", automobili);
+        model.addAttribute("modello", modello);
         return "automobili/index";
     }
 
@@ -46,16 +53,6 @@ public class AutomobileController {
         model.addAttribute("automobile", automobile);
         model.addAttribute("recensioni", automobile.getRecensioni());
         return "automobili/show";
-    }
-
-    // ricerca
-    @GetMapping("/searchByModel")
-    public String searchByModel(@RequestParam(name = "modello") String modello,
-            Model model) {
-        List<Automobile> automobile = automobileService.findByModelloContaining(modello);
-        model.addAttribute("automobili", automobile);
-        model.addAttribute("name", modello);
-        return "automobili/index";
     }
 
     // creazione nuova auto + optional
